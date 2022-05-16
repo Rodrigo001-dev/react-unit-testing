@@ -3,6 +3,7 @@
 Nessa aplicação apliquei testes dentro do React.
 Utilizando as ferramentas: Jest para fazer os testes e também o React Testing Library que é uma ferramenta que trás alguns helpers para executar testes dentro do ecossistema React tanto para o React-Native e para o React para web.
 O React Testing Library ele vai auxiliar para ter algumas funcionalidades de uma maneira mais rápida mas ele não é necessário para fazer os testes.
+[Veja mais sobre o React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
 <LINKEDIN>
 Pra quem nunca escreveu testes, testes só vai começar a fazer sentido quando vocês sofrerem pela falta de teste, ou seja, testes só vai fazer sentido quando nós passarmos pela dor de não ter testes em uma aplicação grande.
