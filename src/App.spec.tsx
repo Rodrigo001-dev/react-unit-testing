@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import App from './App';
 
 // test('', () => {
@@ -31,5 +31,20 @@ describe('App Component', () => {
     expect(getByText('Rodrigo')).toBeInTheDocument();
     expect(getByText('Rafael')).toBeInTheDocument();
     expect(getByText('Gabriel')).toBeInTheDocument();
+  });
+
+  it('should be able to add new item to the list', () => {
+    const { getByText, debug } = render(<App />);
+    
+    const addButton = getByText('Adicionar');
+
+    debug();
+
+    // o fireEvent permite disparar ações dentro da interface na minha aplicação
+    fireEvent.click(addButton);
+
+    debug();
+
+    expect(getByText('Novo')).toBeInTheDocument();
   });
 });
