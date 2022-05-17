@@ -1,4 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 
@@ -49,7 +49,33 @@ describe('App Component', () => {
 
     debug();
 
+    // o waitFor roda um loop que vai rodar várias vezes ate retornar um valor
+    // que é valido 
+    await waitFor(() => {
+      expect(getByText('Novo')).toBeInTheDocument();
+    });
+
     // o findByText vai esperar o elemento aparecer em tela
-    expect(await findByText('Novo')).toBeInTheDocument();
+    // expect(await findByText('Novo')).toBeInTheDocument();
+  });
+
+  it('should be able to add remove item from the list', async () => {
+    const { getAllByText, queryByText } = render(<App />);
+
+    // pegando todos os buttons que esta escrito Remover
+    const removeButtons = getAllByText('Remover');
+
+    // disparando um evento para clicar no primeiro button
+    userEvent.click(removeButtons[0]);
+
+    await waitFor(() => {
+      // o not é para fazer uma negação, ou seja, que o Rodrigo não estaja no
+      // documento
+      expect(queryByText('Rodrigo')).not.toBeInTheDocument();
+    });
+
+    // await waitForElementToBeRemoved(() => {
+    //   return getByText('Rodrigo');
+    // });
   });
 });
