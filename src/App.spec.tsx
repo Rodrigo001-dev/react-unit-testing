@@ -34,8 +34,8 @@ describe('App Component', () => {
     expect(getByText('Gabriel')).toBeInTheDocument();
   });
 
-  it('should be able to add new item to the list', () => {
-    const { getByText, debug, getByPlaceholderText } = render(<App />);
+  it('should be able to add new item to the list', async () => {
+    const { getByText, debug, getByPlaceholderText, findByText } = render(<App />);
     
     const inputElement = getByPlaceholderText('Novo item');
     const addButton = getByText('Adicionar');
@@ -49,6 +49,7 @@ describe('App Component', () => {
 
     debug();
 
-    expect(getByText('Novo')).toBeInTheDocument();
+    // o findByText vai esperar o elemento aparecer em tela
+    expect(await findByText('Novo')).toBeInTheDocument();
   });
 });
