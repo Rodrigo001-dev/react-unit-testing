@@ -1,4 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from './App';
 
 // test('', () => {
@@ -34,14 +35,17 @@ describe('App Component', () => {
   });
 
   it('should be able to add new item to the list', () => {
-    const { getByText, debug } = render(<App />);
+    const { getByText, debug, getByPlaceholderText } = render(<App />);
     
+    const inputElement = getByPlaceholderText('Novo item');
     const addButton = getByText('Adicionar');
 
     debug();
 
-    // o fireEvent permite disparar ações dentro da interface na minha aplicação
-    fireEvent.click(addButton);
+    // o userEvent permite disparar ações dentro da interface na minha aplicação
+    userEvent.type(inputElement, 'Novo');
+    userEvent.click(addButton);
+
 
     debug();
 
