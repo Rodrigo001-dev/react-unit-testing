@@ -1,6 +1,6 @@
-import { render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import App from './App';
+import List from './List';
 
 // test('', () => {
 //   // por ter configurando o swc eu posso importar um componente react dentro do
@@ -25,17 +25,24 @@ import App from './App';
 //   expect(getByText('Hello World')).toBeInTheDocument();
 // });
 
-describe('App Component', () => {
+describe('List Component', () => {
   it('should render list items', () => {
-    const { getByText } = render(<App />);
+    const { getByText, rerender } = render(<List initialItems={['Rodrigo', 'Rafael', 'Gabriel']} />);
 
     expect(getByText('Rodrigo')).toBeInTheDocument();
     expect(getByText('Rafael')).toBeInTheDocument();
     expect(getByText('Gabriel')).toBeInTheDocument();
+
+    // o rerender permite renderizar novamente um componente trocando as props
+    // que eu passei
+    rerender(<List initialItems={['Julius']} />);
+
+    expect(screen.getByText('Julius')).toBeInTheDocument();
+    expect(screen.queryByText('Rafael')).toBeInTheDocument();
   });
 
   it('should be able to add new item to the list', async () => {
-    const { getByText, debug, getByPlaceholderText, findByText } = render(<App />);
+    const { getByText, debug, getByPlaceholderText, findByText } = render(<List initialItems={[]} />);
     
     const inputElement = getByPlaceholderText('Novo item');
     const addButton = getByText('Adicionar');
@@ -60,7 +67,7 @@ describe('App Component', () => {
   });
 
   it('should be able to add remove item from the list', async () => {
-    const { getAllByText, queryByText } = render(<App />);
+    const { getAllByText, queryByText } = render(<List initialItems={['Rodrigo']} />);
 
     // pegando todos os buttons que esta escrito Remover
     const removeButtons = getAllByText('Remover');

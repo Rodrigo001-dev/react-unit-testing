@@ -1,8 +1,12 @@
 import { useState } from "react"
 
-function List() {
+type ListProps = {
+  initialItems: string[];
+};
+
+function List({ initialItems }: ListProps) {
   const [newItem, setNewItem] = useState('');
-  const [list, setList] = useState(['Rodrigo', 'Rafael', 'Gabriel']);
+  const [list, setList] = useState(initialItems);
 
   function addToList() {
     setTimeout(() => {
