@@ -1,4 +1,4 @@
-## Projeto
+## :page_with_curl: Projeto
 
 Nessa aplicação apliquei testes dentro do React.
 Utilizando as ferramentas: Jest para fazer os testes e também o React Testing Library que é uma ferramenta que trás alguns helpers para executar testes dentro do ecossistema React tanto para o React-Native e para o React para web.
